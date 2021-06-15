@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tobe.project.mapper.memberMapper">
+ 	<select id="selectAllMember" resultType="memberVO">
+ 		select * from tobe_member where delyn = 'N' order by tidx desc
+ 	</select>
+ 	<select id="searchDepartmentMember" resultType="memberVO">
+ 		select * from tobe_member where t_department = #{t_department} order by tidx desc
+ 	</select>
+    <select id="selectOneMember" resultType="memberVO">
+    	select * from tobe_member where tidx = #{tidx}
+    </select>
+    <select id="searchMember" resultType="memberVO">
+    	SELECT * FROM TOBE_MEMBER WHERE DELYN = 'N'
+		AND T_DEPARTMENT = #{t_department} AND T_NAME LIKE '%'||#{t_name}||'%'
+    	ORDER BY TIDX DESC
+    </select>
+</mapper>
