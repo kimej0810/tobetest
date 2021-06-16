@@ -17,6 +17,8 @@
 	<a href="/admin/sendlist2">발송함연습</a>
 	<a href="/schedule/fullcalendar">륜광</a>
 	<a href="/admin/emaillist">페이징연습</a>
+	<a href="/member/login">로그인</a>
+	<a href="/member/findPwd">비밀번호찾기</a>
 </p>
 </body>
 </html>

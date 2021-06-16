@@ -62,4 +62,8 @@ public class AdminServiceImpl implements AdminService{
 	public FileVO selectOneFile(int tidx) throws Exception {
 		return dao.selectOneFile(tidx);
 	}
+	@Override
+	public String selectOneId() throws Exception {
+		return dao.selectOneId();
+	}
 }

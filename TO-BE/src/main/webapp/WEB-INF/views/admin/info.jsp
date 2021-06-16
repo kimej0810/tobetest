@@ -15,13 +15,9 @@
 	    height: 98vh;
 	    padding:1%;
     }
-    .infoImg{
-    	width:100px;
-    	height:150px;
-    }
     .infoImg img{
-    	width:100px;
-    	height:150px;
+    	width:150px;
+    	height:200px;
     }
     .tableBtn{
     	text-align:right;

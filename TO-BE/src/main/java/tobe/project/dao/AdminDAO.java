@@ -12,6 +12,8 @@ public interface AdminDAO {
 	public int addMember(MemberVO vo) throws Exception;
 	public MemberVO selectOneMember(int tidx) throws Exception;
 	public int modifyMember(MemberVO vo) throws Exception;
+	//마지막 사원번호 가져오기
+	public String selectOneId() throws Exception;
 	//페이징
 	public int totalCountMember(String keyword) throws Exception;
 	public List<MemberVO> searchMemberList(SearchCriteria searchCriteria) throws Exception;

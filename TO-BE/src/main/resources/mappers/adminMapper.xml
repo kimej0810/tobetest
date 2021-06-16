@@ -7,6 +7,9 @@
 	<select id="selectAllMember" resultType="memberVO">
  		select * from TOBE_MEMBER WHERE DELYN = 'N' order by tidx desc
  	</select>
+ 	<select id="selectOneId" resultType="string">
+ 		SELECT T_ID FROM TOBE_MEMBER WHERE TIDX = (SELECT MAX(TIDX) FROM TOBE_MEMBER)
+ 	</select>
 	<insert id="addMember" parameterType="tobe.project.dto.MemberVO" useGeneratedKeys="true" keyProperty="tidx">
 		<selectKey keyProperty="tidx" resultType="int" order="BEFORE">
 			SELECT TIDX_SEQ.NEXTVAL FROM DUAL

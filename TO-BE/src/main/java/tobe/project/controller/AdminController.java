@@ -15,7 +15,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.encoding.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -58,14 +58,32 @@ public class AdminController{
 	private MemberService memberService;
 	
 	//06-15 시큐리티
+	@Inject
+	BCryptPasswordEncoder pwdEncoder;
 	
 	//파일 저장 기본 경로 bean 등록
 	@Resource(name = "uploadPath")
 	private String uploadPath;
 	
 	@RequestMapping(value="/add")
-	public String addMember(Locale locale, Model model) {
+	public String addMember(Locale locale, Model model) throws Exception {
 		logger.info("Welcome home! The client locale is {}.", locale);
+		String t_id = service.selectOneId();
+		String[] tid = t_id.split("-");
+		int nextTid = Integer.parseInt(tid[1])+1;
+		int length = (int)(Math.log10(nextTid)+1);
+		System.out.println("nextTid>>>>>>>>>>>>"+nextTid);
+		System.out.println("length>>>>>>>>>>>>"+length);
+		String hipen = "";
+		if(length==2) {
+			hipen = "-00";
+		}else if(length==3) {
+			hipen = "-0";
+		}
+		else if(length==1) {
+			hipen = "-000";
+		}
+		model.addAttribute("tid",tid[0]+hipen+nextTid);
 		return "/admin/add";
 	}
 	@RequestMapping(value="/add2")
@@ -83,13 +101,16 @@ public class AdminController{
 	//파일 업로드 테스트
 	@RequestMapping(value="/addAction")
 	public String addMemberAction(Locale locale, Model model, MemberVO vo,MultipartHttpServletRequest mpRequest) throws Exception {
-		//service.addMember(vo);
+		String tid = vo.getT_id();
+		System.out.println("tid>>>>>>>>"+tid);
+		String pwd = pwdEncoder.encode(tid);
+		System.out.println("암호화된 비번"+pwd);
+		vo.setT_pwd(pwd);
 		service.addMember2(vo,mpRequest);
-		
-		model.addAttribute("member",vo);
 		System.out.println("가입완료");
 		return "redirect:/admin/memberlist";
 	}
+	
 	////////////////////파일테스트///////////////////////////////////////
 	//업로드파일 https://cameldev.tistory.com/68
 	@RequestMapping(value="/upload", produces = "text/pliain;charset=UTF-8")

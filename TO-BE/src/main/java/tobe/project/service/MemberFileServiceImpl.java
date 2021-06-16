@@ -7,12 +7,17 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Repository;
 
 import tobe.project.dao.MemberFileDAO;
+import tobe.project.dto.FileVO;
 
 @Repository
 public class MemberFileServiceImpl implements MemberFileService{
 	
 	@Inject
 	private MemberFileDAO dao;
+	@Override
+	public List<FileVO> selectAllFile()throws Exception{
+		return dao.selectAllFile();
+	}
 	@Override
 	public void addFile(String fullName, Integer tidx) throws Exception {
 		dao.addFile(fullName, tidx);

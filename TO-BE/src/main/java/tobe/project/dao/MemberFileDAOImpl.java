@@ -9,12 +9,18 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import tobe.project.dto.FileVO;
+
 @Repository
 public class MemberFileDAOImpl implements MemberFileDAO{
 	@Inject
 	private SqlSession sqlSession;
 	private static final String NAMESPACE = "tobe.project.mapper.memberFileMapper";
 	
+	@Override
+	public List<FileVO> selectAllFile()throws Exception{
+		return sqlSession.selectList(NAMESPACE+".selectAllFile");
+	}
 	//첨부파일 추가
 	@Override
 	public void addFile(String fullName, Integer tidx) throws Exception {

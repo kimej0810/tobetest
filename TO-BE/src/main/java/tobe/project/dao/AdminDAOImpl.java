@@ -60,5 +60,9 @@ public class AdminDAOImpl implements AdminDAO{
 	public FileVO selectOneFile(int tidx) throws Exception {
 		return sqlSession.selectOne(Namespace+".selectOneFile",tidx);
 	}
+	@Override
+	public String selectOneId() throws Exception {
+		return sqlSession.selectOne(Namespace+".selectOneId");
+	}
 
 }

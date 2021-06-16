@@ -1,9 +1,7 @@
 package tobe.project.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import tobe.project.domain.Criteria;
 import tobe.project.domain.SearchCriteria;
 import tobe.project.dto.EmailVO;
 

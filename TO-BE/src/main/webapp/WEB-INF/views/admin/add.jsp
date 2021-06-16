@@ -63,7 +63,7 @@
     //썸네일 클릭시 삭제.
     function fileRemove(index){
     	fileInfoArr.splice(index,1);
-    	var imgId="#ing_id_"+index;
+    	var imgId="#img_id_"+index;
     	$(imgId).remove();
     }
     //썸네일 미리보기
@@ -102,15 +102,14 @@
 	            var imageType = /image.*/; //이미지 파일일경우만.. 뿌려준다.
 	            if (!file.type.match(imageType))
 	                continue;
-	            // var prevImg = document.getElementById("prev_" + View_area); //이전에 미리보기가 있다면 삭제
-	            // if (prevImg) {
-	            //     preview.removeChild(prevImg);
-	            // }
-	 
+	            var prevImg = document.getElementById("img_id_"+i); //이전에 미리보기가 있다면 삭제
+	            if (prevImg) {
+	            	preview.removeChild(prevImg);
+	            }
 	            var span = document.createElement('span');
 	            span.id="img_id_" +i;
-	            span.style.width = '100px';
-	            span.style.height = '150px';
+	            span.style.width = '170px';
+	            span.style.height = '200px';
 	            preview.appendChild(span);
 	 
 	            var img = document.createElement("img");
@@ -121,7 +120,9 @@
 	            img.style.height='inherit';
 	            img.style.cursor='pointer';
 	            const idx=i;
-	            img.onclick=()=>fileRemove(idx);   //이미지를 클릭했을 때.
+	            img.onclick=function(){
+	            	fileRemove(idx);
+	            }
 	            span.appendChild(img);
 	 
 	            if (window.FileReader) { // FireFox, Chrome, Opera 확인.
@@ -152,13 +153,9 @@
 	    height: 98vh;
 	    padding:1%;
     }
-    .infoImg{
-    	width:100px;
-    	height:150px;
-    }
     .infoImg img{
-    	width:100px;
-    	height:150px;
+    	width:150px;
+    	height:200px;
     }
     .tableBtn{
     	text-align:right;
@@ -177,40 +174,52 @@
     .selectJk, .selectBuseo{
     	width:180px;
     }
+    	.fileLabel{
+		padding:.5em .75em;
+		color:#999;
+		font-size:inherit;
+		line-height:normal;
+		vertical-align:middle;
+		background-color:#fdfdfd;
+		cursor:pointer;
+		border:1px solid #ebebeb;
+		border-bottom-color:#e2e2e2;
+		border-radius:.25em;
+	}
+	input[type="file"]{
+		position:absolute;
+		width:1px;
+		height:1px;
+		padding:0;
+		margin:-1px;
+		overflow:hidden;
+		clip:rect(0,0,0,0);
+		border:0;
+	}
 </style>
 <body>
 	<div class="sub">
 		<div class="headerT"><h1>사원 등록</h1></div>
 		<div class="formDiv">
 			<form action="/admin/addAction" method="post" enctype="multipart/form-data">
-				<table>
+				<table border="1">
 					<colgroup>
-						<col width="20%"></col>
-						<col width="80%"></col>
+						<col width="40%"></col>
+						<col width="30%"></col>
+						<col width="30%"></col>
 					</colgroup>
 					<tbody>
 						<tr>
-							<td rowspan="6">
+							<td rowspan="4" style="text-align:center;">
 								<div class="infoImg">
-									<span id="View_area" style="width:100px;height:150px;"></span>
-									<input type="file" name="file" id="file" onchange="previewImage(this,'View_area')" value="사진 등록">
+									<span id="View_area"></span>
 								</div>
 							</td>
-						</tr>
-						<tr>
 							<td>
 								<label><h2>사원 번호</h2></label>
 							</td>
 							<td>
-								<input type="text" placeholder="사원 번호" name="t_id">
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<label><h2>초기 비밀번호</h2></label>
-							</td>
-							<td>
-								<input type="password" placeholder="초기 비밀번호" name="t_pwd">
+								<input type="text" name="t_id" value="${tid}" readonly>
 							</td>
 						</tr>
 						<tr>
@@ -246,6 +255,10 @@
 							</td>
 						</tr>
 						<tr>
+							<td style="text-align:center;">
+								<label for="file" class="fileLabel">프로필 등록</label>
+								<input type="file" name="file" id="file" onchange="previewImage(this,'View_area')" value="사진 등록">
+							</td>
 							<td>
 								<label><h2>직책</h2></label>
 							</td>
@@ -303,7 +316,7 @@
 				</table>
 				<div class="tableBtn">
 					<input type="submit" class="saoneBtn" value="사원 등록">
-					<input type="button" class="saoneBtn" value="취소">
+					<input type="button" class="saoneBtn" onclick="history.go(-1)" value="취소">
 				</div>
 			</form>
 		</div>
