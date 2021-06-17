@@ -110,7 +110,7 @@
 		<div class="buseoSearch">
 			<span>부서</span>
 			<select class="selectBuseo" id="t_department" name="t_department">
-				<option value="전체">부서 선택</option>
+				<option value="all">부서 선택</option>
 				<option value="마케팅">마케팅</option>
 				<option value="판매">판매</option>
 				<option value="디자인">디자인</option>

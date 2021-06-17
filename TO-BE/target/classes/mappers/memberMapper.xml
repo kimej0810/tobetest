@@ -6,15 +6,29 @@
  	<select id="selectAllMember" resultType="memberVO">
  		select * from tobe_member where delyn = 'N' order by tidx desc
  	</select>
- 	<select id="searchDepartmentMember" resultType="memberVO">
+ 	<!-- <select id="searchDepartmentMember" resultType="memberVO">
  		select * from tobe_member where t_department = #{t_department} order by tidx desc
+ 	</select> -->
+ 	<select id="searchDepartmentMember" resultType="memberDTO">
+ 		SELECT A.*,B.F_STORED_FILE_NAME,B.F_TYPE
+ 		FROM TOBE_MEMBER A LEFT JOIN FILE_INFOTEST B ON A.TIDX = B.TIDX where A.t_department = #{t_department}
  	</select>
-    <select id="selectOneMemberIdx" resultType="memberVO">
+    <!-- <select id="selectOneMemberIdx" resultType="memberVO">
     	select * from tobe_member where tidx = #{tidx}
+    </select> -->
+    <select id="selectOneMemberIdx" resultType="memberDTO">
+    	SELECT A.*,B.F_STORED_FILE_NAME,B.F_TYPE
+ 		FROM TOBE_MEMBER A LEFT JOIN FILE_INFOTEST B ON A.TIDX = B.TIDX where A.TIDX = #{tidx}
     </select>
     <select id="searchMember" resultType="memberVO">
     	SELECT * FROM TOBE_MEMBER WHERE DELYN = 'N'
 		AND T_DEPARTMENT = #{t_department} AND T_NAME LIKE '%'||#{t_name}||'%'
+    	ORDER BY TIDX DESC
+    </select>
+    <!-- 부서 전체 검색 -->
+    <select id="searchMember2" resultType="memberVO">
+    	SELECT * FROM TOBE_MEMBER WHERE DELYN = 'N'
+		AND T_NAME LIKE '%'||#{t_name}||'%'
     	ORDER BY TIDX DESC
     </select>
     <!-- 06-15추가 -->
@@ -58,4 +72,10 @@
  		t_addr_detail = #{t_addr_detail}
  		where t_id = #{t_id}
  	</update>
+ 	<select id="selectAllMember2" resultType="memberDTO">
+ 	<![CDATA[
+ 		SELECT A.*,B.F_STORED_FILE_NAME,B.F_TYPE
+ 		FROM TOBE_MEMBER A LEFT JOIN FILE_INFOTEST B ON A.TIDX = B.TIDX
+ 	]]>
+ 	</select>
 </mapper>

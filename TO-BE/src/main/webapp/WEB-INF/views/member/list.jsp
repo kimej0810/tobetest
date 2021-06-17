@@ -23,7 +23,11 @@
 						for(var i=0; i<searchDepartmentMember.length;i++){
 							solist += "<div class='info'>";
 							solist += "<input type='hidden' id='tidx' name='tidx' value='"+searchDepartmentMember[i].tidx+"'>";
-							solist += "<img src='<c:url value='/resources/static/img/logo3.png'/>'>";
+							if(searchDepartmentMember[i].f_stored_file_name!=null){
+							solist += "<img src='<c:url value='/resources/static/filefolder/"+searchDepartmentMember[i].f_stored_file_name+"'/>'>";
+							}else{
+								solist += "<img src='<c:url value='/resources/static/img/profile.png'/>'>";
+							}
 							solist += " <span>";
 							solist += searchDepartmentMember[i].t_name;
 							solist += "</span>";
@@ -59,7 +63,7 @@
 				success:function(selectOneMember){
 					var solist = "";
 					solist += "<tr><td rowspan='2'>";
-					solist += "<img src='<c:url value='/resources/static/img/logo3.png'/>'></td>";
+					solist += "<img src='<c:url value='/resources/static/filefolder/"+selectOneMember.f_stored_file_name+"'/>'></td>";
 					solist += "<td>이름</td><td>";
 					solist += selectOneMember.t_name;
 					solist += "</td></tr><tr><td>부서</td><td>";
@@ -124,7 +128,7 @@
 		<div class="buseoSearch">
 			<span>부서</span>
 			<select class="selectBuseo" id="t_department" name="t_department">
-				<option value="전체">부서 선택</option>
+				<option value="all">부서 선택</option>
 				<option value="마케팅">마케팅</option>
 				<option value="판매">판매</option>
 				<option value="디자인">디자인</option>
@@ -144,7 +148,7 @@
 			<c:forEach items="${selectAllMember}" var="member">
 				<div class="info">
 					<input type="hidden" id="tidx" name="tidx" value="${member.tidx}">
-					<img src="<c:url value="/resources/static/img/profile.png"/>" alt="프로필이미지">
+					<img src="<c:url value="/resources/static/filefolder/${member.f_stored_file_name}"/>" alt="프로필이미지">
 					<span>${member.t_name}</span>
 					<span>${member.t_department}</span>
 					<span>${member.t_position}</span>

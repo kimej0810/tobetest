@@ -7,7 +7,7 @@
             <typeAlias type="tobe.project.dto.MemberVO" alias="memberVO"/>
             <typeAlias type="tobe.project.dto.EmailVO" alias="emailVO"/>
             <typeAlias type="tobe.project.dto.FileVO" alias="fileVO"/>
-            <typeAlias type="tobe.project.dto.LoginDTO" alias="memberDTO"/>
+            <typeAlias type="tobe.project.dto.MemberDTO" alias="memberDTO"/>
             <typeAlias type="tobe.project.dto.LoginDTO" alias="loginDTO"/>
         </typeAliases>
     </configuration>

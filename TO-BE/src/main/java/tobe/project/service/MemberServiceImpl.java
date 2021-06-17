@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import tobe.project.dao.MemberDAO;
 import tobe.project.dto.LoginDTO;
+import tobe.project.dto.MemberDTO;
 import tobe.project.dto.MemberVO;
 
 @Repository
@@ -21,17 +22,32 @@ public class MemberServiceImpl implements MemberService{
 	public List<MemberVO> selectAllMember() throws Exception{
 		return dao.selectAllMember();
 	}
+
+	/*
+	 * @Override public List<MemberVO> searchDepartmentMember(String
+	 * t_department)throws Exception{ return
+	 * dao.searchDepartmentMember(t_department); }
+	 */
 	@Override
-	public List<MemberVO> searchDepartmentMember(String t_department)throws Exception{
+	public List<MemberDTO> searchDepartmentMember(String t_department)throws Exception{
 		return dao.searchDepartmentMember(t_department);
 	}
+
+	/*
+	 * @Override public MemberVO selectOneMemberIdx(int tidx) throws Exception {
+	 * return dao.selectOneMemberIdx(tidx); }
+	 */
 	@Override
-	public MemberVO selectOneMemberIdx(int tidx) throws Exception {
+	public MemberDTO selectOneMemberIdx(int tidx) throws Exception {
 		return dao.selectOneMemberIdx(tidx);
 	}
 	@Override
 	public List<MemberVO> searchMember(MemberVO vo) throws Exception {
 		return dao.searchMember(vo);
+	}
+	@Override
+	public List<MemberVO> searchMember2(String t_name) throws Exception {
+		return dao.searchMember2(t_name);
 	}
 	//////////////////////////////////////////////////////////
 	//로그인
@@ -103,5 +119,9 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public void memberUpdate(MemberVO vo) throws Exception {
 		dao.memberUpdate(vo);
+	}
+	@Override
+	public List<MemberDTO> selectAllMember2() throws Exception {
+		return dao.selectAllMember2();
 	}
 }

@@ -12,4 +12,5 @@ public interface EmailService {
 	List<EmailVO> searchEmailList(SearchCriteria searchCriteria) throws Exception;
 	int totalCountsearchEmail(SearchCriteria searchCriteria) throws Exception;
 	public EmailVO selectOneEmail(int midx) throws Exception;
+	
 }

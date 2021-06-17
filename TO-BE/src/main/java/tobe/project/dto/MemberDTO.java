@@ -17,6 +17,8 @@ public class MemberDTO {
 	private String t_leave_get;
 	private String t_grade;
 	private String delyn;
+	private String f_type;
+	private String f_stored_file_name;
 	public int getTidx() {
 		return tidx;
 	}
@@ -112,5 +114,17 @@ public class MemberDTO {
 	}
 	public void setDelyn(String delyn) {
 		this.delyn = delyn;
+	}
+	public String getF_type() {
+		return f_type;
+	}
+	public void setF_type(String f_type) {
+		this.f_type = f_type;
+	}
+	public String getF_stored_file_name() {
+		return f_stored_file_name;
+	}
+	public void setF_stored_file_name(String f_stored_file_name) {
+		this.f_stored_file_name = f_stored_file_name;
 	}
 }
